@@ -1,3 +1,4 @@
+<p data-ke-size="size16">&nbsp;</p>
 <div>
 <style>
 /* AI 기술 블로그 표준 스타일 */
@@ -41,6 +42,60 @@ h3 {
     padding: 15px;
     margin: 20px 0;
     font-family: 'Courier New', monospace;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.code-block.collapsed {
+    max-height: 200px;
+}
+
+.code-block.expanded {
+    max-height: none;
+}
+
+.code-toggle-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(0, 102, 204, 0.8);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+}
+
+.code-toggle-btn:hover {
+    background-color: rgba(0, 102, 204, 1);
+}
+
+.code-block.collapsed .code-toggle-btn::after {
+    content: "펼치기 ▼";
+}
+
+.code-block.expanded .code-toggle-btn::after {
+    content: "접기 ▲";
+}
+
+.code-fade-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: linear-gradient(transparent, #f5f5f5);
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.code-block.expanded .code-fade-overlay {
+    opacity: 0;
 }
 .performance-table {
   width: 100%;
@@ -80,11 +135,27 @@ h3 {
     padding: 15px;
     margin: 20px 0;
 }
+
 </style>
 </div>
-<h2 id="introduction" data-ke-size="size26">🤖 Omnilingual ASR: 다국어 음성 인식의 새로운 패러다임</h2>
-<p data-ke-size="size16"><span class="ai-tech">AI 기술</span>이 발전하면서 음성 인식(Automatic Speech Recognition, ASR) 분야에서도 놀라운 변화가 일어나고 있습니다. 특히 Facebook Research에서 개발한 <b>Omnilingual ASR</b>은 <b>100개 이상의 언어</b>를 지원하는 혁신적인 다국어 음성 인식 모델로, 전 세계 사용자들에게 언어 장벽 없는 음성 인식 경험을 제공하고 있습니다.</p>
-<p data-ke-size="size16">이번 포스팅에서는 Omnilingual ASR의 기술적 특징과 핵심 원리를 심층적으로 분석하고, 초보자도 쉽게 따라할 수 있는 실전 예제를 통해 실제 구현 방법을 알아보겠습니다.</p>
+<p data-ke-size="size16"><span class="ai-tech">AI 기술</span>이 발전하면서 음성 인식(Automatic Speech Recognition, ASR) 분야에서도 놀라운 변화가 일어나고 있습니다. 특히 <b>Facebook Research</b>에서 개발한 <b>Omnilingual ASR</b>은 <b>100개 이상의 언어</b>를 지원하는 혁신적인 다국어 음성 인식 모델로, 전 세계 사용자들에게 언어 장벽 없는 음성 인식 경험을 제공하고 있습니다. 이번 포스팅에서는 Omnilingual ASR의 기술적 특징과 핵심 원리를 심층적으로 분석하고, 초보자도 쉽게 따라할 수 있는 실전 예제를 통해 실제 구현 방법을 알아보겠습니다.</p>
+<p>[##_Image|kage@bwRoVe/dJMcagqjdGG/AAAAAAAAAAAAAAAAAAAAANS3dOmos-vSF-LDdvLdI08onxWRR2wkQePkthbUXPkA/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1764514799&amp;allow_ip=&amp;allow_referer=&amp;signature=Gr96Gs7Po%2BF%2FETFOruoIREDzUIM%3D|CDM|1.3|{"originWidth":1934,"originHeight":715,"style":"alignCenter","caption":"🤖 Omnilingual ASR: 페이스북 연구팀이 개발한 다국어 음성 인식 모델"}_##]</p>
+<p data-ke-size="size16"><a href="https://ai.meta.com/blog/omnilingual-asr-advancing-automatic-speech-recognition/" target="_blank" rel="noopener&nbsp;noreferrer">https://ai.meta.com/blog/omnilingual-asr-advancing-automatic-speech-recognition/</a></p>
+<figure id="og_1762845625134" contenteditable="false" data-ke-type="opengraph" data-ke-align="alignCenter" data-og-type="website" data-og-title="Omnilingual ASR: Advancing Automatic Speech Recognition for 1,600+ Languages" data-og-description="Beyond expanding to more than 1,600 languages, Omnilingual ASR also shifts the paradigm for how new languages can be brought into the fold. In most existing systems, languages not included at release time can only be added through expert-driven fine-tuning" data-og-host="ai.meta.com" data-og-source-url="https://ai.meta.com/blog/omnilingual-asr-advancing-automatic-speech-recognition/" data-og-url="https://ai.meta.com/blog/omnilingual-asr-advancing-automatic-speech-recognition/" data-og-image="https://scrap.kakaocdn.net/dn/cOe6xV/hyZMCldvxP/xFtezGXGk5sIPEEnrQhPW1/img.jpg?width=1920&amp;height=1080&amp;face=1044_255_1359_597,https://scrap.kakaocdn.net/dn/bJIqW8/hyZNrcgya7/EWNcVnEhXTnJzERkEFJd91/img.jpg?width=1920&amp;height=1080&amp;face=1044_255_1359_597"><a href="https://ai.meta.com/blog/omnilingual-asr-advancing-automatic-speech-recognition/" target="_blank" rel="noopener" data-source-url="https://ai.meta.com/blog/omnilingual-asr-advancing-automatic-speech-recognition/">
+<div class="og-image" style="background-image: url('https://scrap.kakaocdn.net/dn/cOe6xV/hyZMCldvxP/xFtezGXGk5sIPEEnrQhPW1/img.jpg?width=1920&amp;height=1080&amp;face=1044_255_1359_597,https://scrap.kakaocdn.net/dn/bJIqW8/hyZNrcgya7/EWNcVnEhXTnJzERkEFJd91/img.jpg?width=1920&amp;height=1080&amp;face=1044_255_1359_597');">&nbsp;</div>
+<div class="og-text">
+<p class="og-title" data-ke-size="size16">Omnilingual ASR: Advancing Automatic Speech Recognition for 1,600+ Languages</p>
+<p class="og-desc" data-ke-size="size16">Beyond expanding to more than 1,600 languages, Omnilingual ASR also shifts the paradigm for how new languages can be brought into the fold. In most existing systems, languages not included at release time can only be added through expert-driven fine-tuning</p>
+<p class="og-host" data-ke-size="size16">ai.meta.com</p>
+</div>
+</a></figure>
+<p data-ke-size="size16">
+<script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3799985281132996"></script>
+<!-- 수평형 --></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">
+<script>     (adsbygoogle = window.adsbygoogle || []).push({});</script>
+</p>
 <h2 id="technical-overview" data-ke-size="size26">🔍 Omnilingual ASR 기술적 특징</h2>
 <div class="concept-block">
 <h3 data-ke-size="size23">핵심 아키텍처</h3>
@@ -363,24 +434,201 @@ class StreamingASR:
 <li><b>병렬 처리</b>: 멀티프로세싱을 활용하여 여러 음성 파일을 동시에 처리하세요</li>
 </ul>
 </div>
-<h2 id="real-world-applications" data-ke-size="size26">🌍 실제 활용 사례</h2>
-<p data-ke-size="size16">Omnilingual ASR은 다양한 분야에서 실제로 활용되고 있습니다.</p>
-<h3 data-ke-size="size23">1. 글로벌 고객 서비스</h3>
-<p data-ke-size="size16">다국어 콜센터에서 고객의 언어를 자동으로 식별하고 응답하는 시스템에 활용됩니다. 예를 들어, 항공사나 호텔 예약 시스템에서 전 세계 고객들의 문의를 실시간으로 처리할 수 있습니다.</p>
-<h3 data-ke-size="size23">2. 교육 분야</h3>
-<p data-ke-size="size16">언어 학습 앱에서 사용자의 발음을 평가하고 피드백을 제공하는 기능에 활용됩니다. 다국어 환경에서의 온라인 교육 플랫폼에서 강의 내용을 자동으로 자막 처리하는 데도 사용됩니다.</p>
-<h3 data-ke-size="size23">3. 콘텐츠 제작</h3>
-<p data-ke-size="size16">YouTube나 팟캐스트와 같은 멀티미디어 콘텐츠의 자동 자막 생성에 활용됩니다. 특히 다국어 콘텐츠의 경우, 한 번에 여러 언어의 자막을 생성할 수 있어 매우 효율적입니다.</p>
-<h2 id="future-outlook" data-ke-size="size26">🔮 미래 전망</h2>
-<p data-ke-size="size16">Omnilingual ASR 기술은 앞으로 더욱 발전할 것입니다. <span class="ai-tech">AI 기술</span>의 발전과 함께 다음과 같은 변화가 예상됩니다:</p>
-<ul style="list-style-type: disc;" data-ke-list-type="disc">
-<li><b>더 많은 언어 지원</b>: 현재 100개 언어에서 200개 이상의 언어로 확장</li>
-<li><b>실시간 번역 통합</b>: 음성 인식과 실시간 번역이 결합된 완벽한 커뮤니케이션 솔루션</li>
-<li><b>개인화된 모델</b>: 사용자별 음성 특성에 맞춰 최적화된 퍼스널 ASR</li>
-<li><b>엣지 디바이스 최적화</b>: 스마트폰이나 IoT 기기에서 로컬로 동작하는 경량화 모델</li>
-</ul>
+<p data-ke-size="size16">
+<script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3799985281132996"></script>
+</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">
+<script>     (adsbygoogle = window.adsbygoogle || []).push({});</script>
+</p>
+<h2 id="real-world-applications" data-ke-size="size26">🌍 DEMO 테스트</h2>
+<p data-ke-size="size16">다음은 Omnilingual ASR 데모 사이트에서 테스트를 해보겠습니다. 입력 오디오 파일은 <b>晚风如她 (夜醉版)라는 중국어 노래</b>의 MP3를 입력해보았습니다. 이 MP3는 <b>악기소리와 배경음악</b>으로 인해 음성인식 성공율이 낮을수도 있을것 같습니다.&nbsp;</p>
+<p data-ke-size="size16"><a href="https://huggingface.co/spaces/facebook/omniasr-transcriptions" target="_blank" rel="noopener&nbsp;noreferrer">https://huggingface.co/spaces/facebook/omniasr-transcriptions</a></p>
+<figure id="og_1762844069252" contenteditable="false" data-ke-type="opengraph" data-ke-align="alignCenter" data-og-type="website" data-og-title="Omnilingual ASR Media Transcription - a Hugging Face Space by facebook" data-og-description="" data-og-host="huggingface.co" data-og-source-url="https://huggingface.co/spaces/facebook/omniasr-transcriptions" data-og-url="https://huggingface.co/spaces/facebook/omniasr-transcriptions" data-og-image="https://scrap.kakaocdn.net/dn/hl1CS/hyZNtgRVKw/RrubWAV5QtCuqcXDs6Urg1/img.png?width=1200&amp;height=648&amp;face=0_0_1200_648,https://scrap.kakaocdn.net/dn/bkxYwz/hyZNCRqCW3/QxtxwojKpeDbicVoJnViyk/img.png?width=1200&amp;height=648&amp;face=0_0_1200_648"><a href="https://huggingface.co/spaces/facebook/omniasr-transcriptions" target="_blank" rel="noopener" data-source-url="https://huggingface.co/spaces/facebook/omniasr-transcriptions">
+<div class="og-image" style="background-image: url('https://scrap.kakaocdn.net/dn/hl1CS/hyZNtgRVKw/RrubWAV5QtCuqcXDs6Urg1/img.png?width=1200&amp;height=648&amp;face=0_0_1200_648,https://scrap.kakaocdn.net/dn/bkxYwz/hyZNCRqCW3/QxtxwojKpeDbicVoJnViyk/img.png?width=1200&amp;height=648&amp;face=0_0_1200_648');">&nbsp;</div>
+<div class="og-text">
+<p class="og-title" data-ke-size="size16">Omnilingual ASR Media Transcription - a Hugging Face Space by facebook</p>
+<p class="og-desc" data-ke-size="size16">&nbsp;</p>
+<p class="og-host" data-ke-size="size16">huggingface.co</p>
+</div>
+</a></figure>
+<p>[##_Image|kage@xW6Zw/dJMcadUEEjt/AAAAAAAAAAAAAAAAAAAAAMy7dLJyJwyuWXSXhdIB-JnNVRjqCZ6w4exxtLzZ4vdM/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1764514799&amp;allow_ip=&amp;allow_referer=&amp;signature=QIqO9vIdaJA1AHeG%2FH%2BYW%2FH8uag%3D|CDM|1.3|{"originWidth":2544,"originHeight":1314,"style":"alignCenter","caption":"음성인식 데모사이트 테스트"}_##][##_Image|kage@bAUUNm/dJMcajN6xog/AAAAAAAAAAAAAAAAAAAAAJiLwC4LN_5Or9grJ0rIVuyPM-iaYSbJ7I6hsln8L4op/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1764514799&amp;allow_ip=&amp;allow_referer=&amp;signature=UAxryiBNlyiB9ALf6DYm9HFHSnw%3D|CDM|1.3|{"originWidth":2544,"originHeight":1314,"style":"alignCenter","caption":"음성인식 결과 화면"}_##]</p>
+<p data-ke-size="size16">Omnilingual ASR 데모 사이트에서 <b>중국어 노래 MP3로 테스트 결과</b>, <span style="color: #333333; text-align: start;">Transcription 과정에서 문자 인식이 제대로 되지 않은 텍스트가</span> "??"으로 표시되었으며 아래표와 같이 <b>오타와 불일치가 상당수 발생</b>하였습니다.&nbsp;</p>
+<table style="border-collapse: collapse; width: 100%;" border="1" data-ke-align="alignLeft" data-ke-style="style13">
+<tbody>
+<tr>
+<td style="text-align: center; width: 26.6279%;"><b> 원곡 가사 </b></td>
+<td style="text-align: center; width: 30.1163%;"><b> ASR(음성인식 결과) </b></td>
+<td style="text-align: center; width: 35.1163%;"><b> 일치 및 차이 </b></td>
+<td style="text-align: center; width: 8.02326%;"><b> 유사율(%) </b></td>
+</tr>
+<tr>
+<td style="text-align: center; width: 26.6279%;">算了吧 没心的人最潇洒</td>
+<td style="text-align: center; width: 30.1163%;">算了他没心的人最潇洒</td>
+<td style="text-align: center; width: 35.1163%;">"吧&rarr;他" 오타, 나머지 일치</td>
+<td style="text-align: center; width: 8.02326%;">90.0</td>
+</tr>
+<tr>
+<td style="text-align: center; width: 26.6279%;">等不来 她心软拥抱一下</td>
+<td style="text-align: center; width: 30.1163%;">等不来以他心論拥抱一下</td>
+<td style="text-align: center; width: 35.1163%;">"她心软&rarr;以他心論" 오타,拥抱一下 일치</td>
+<td style="text-align: center; width: 8.02326%;">70.0</td>
+</tr>
+<tr>
+<td style="text-align: center; width: 26.6279%;">放了吧 或许是人海嘈杂</td>
+<td style="text-align: center; width: 30.1163%;">放了他或許是人海嘈杂</td>
+<td style="text-align: center; width: 35.1163%;">"吧&rarr;他" 오타, 나머지 일치</td>
+<td style="text-align: center; width: 8.02326%;">90.0</td>
+</tr>
+<tr>
+<td style="text-align: center; width: 26.6279%;">淹没了 那句要挽留的话</td>
+<td style="text-align: center; width: 30.1163%;">淹没了那具要挽留的話</td>
+<td style="text-align: center; width: 35.1163%;">"句&rarr;具" 오타, 나머지 일치</td>
+<td style="text-align: center; width: 8.02326%;">90.0</td>
+</tr>
+<tr>
+<td style="text-align: center; width: 26.6279%;">忘了吧 承诺被眼泪蒸发</td>
+<td style="text-align: center; width: 30.1163%;">忘了吧 ⁇ 那被眼泪蒸发</td>
+<td style="text-align: center; width: 35.1163%;">"承诺&rarr;⁇那", "被眼泪蒸发" 일치</td>
+<td style="text-align: center; width: 8.02326%;">71.4</td>
+</tr>
+<tr>
+<td style="text-align: center; width: 26.6279%;">又何必 再去让喉咙沙哑</td>
+<td style="text-align: center; width: 30.1163%;">又何必再去让后 ⁇ 沙 ⁇</td>
+<td style="text-align: center; width: 35.1163%;">"喉咙沙哑&rarr;后 ⁇ 沙 ⁇"(불량/누락)</td>
+<td style="text-align: center; width: 8.02326%;">50.0</td>
+</tr>
+<tr>
+<td style="text-align: center; width: 26.6279%;">删了吧 倒背如流的号码</td>
+<td style="text-align: center; width: 30.1163%;">扇了把倒杯无流的放慢</td>
+<td style="text-align: center; width: 35.1163%;">근접연상 단어, 내용 오탈/불일치</td>
+<td style="text-align: center; width: 8.02326%;">40.0</td>
+</tr>
+<tr>
+<td style="text-align: center; width: 26.6279%;">如今我 已不再苦苦挣扎</td>
+<td style="text-align: center; width: 30.1163%;">如今我已不再扩估挣扎</td>
+<td style="text-align: center; width: 35.1163%;">"苦苦&rarr;扩估" 오타, 나머지 일치</td>
+<td style="text-align: center; width: 8.02326%;">80.0</td>
+</tr>
+<tr>
+<td style="text-align: center; width: 26.6279%;">终究是晚风如她推开我又奔天涯</td>
+<td style="text-align: center; width: 30.1163%;">中周是晚碰入她推开我有问题呀</td>
+<td style="text-align: center; width: 35.1163%;">"风如她&rarr;碰入她", 후반 완전히 불일치</td>
+<td style="text-align: center; width: 8.02326%;">35.7</td>
+</tr>
+<tr>
+<td style="text-align: center; width: 26.6279%;">她走后 赐我一身伤疤</td>
+<td style="text-align: center; width: 30.1163%;">她走后自我一身上吧</td>
+<td style="text-align: center; width: 35.1163%;">"赐&rarr;自", "伤疤&rarr;上吧" 오타</td>
+<td style="text-align: center; width: 8.02326%;">55.6</td>
+</tr>
+<tr>
+<td style="text-align: center; width: 26.6279%;">虽然她只是路过也留下一个盛夏</td>
+<td style="text-align: center; width: 30.1163%;">雖然大知是毒火也留下一個剩下</td>
+<td style="text-align: center; width: 35.1163%;">"她只是路过&rarr;大知是毒火", "盛夏&rarr;剩下" 오탈</td>
+<td style="text-align: center; width: 8.02326%;">35.7</td>
+</tr>
+<tr>
+<td style="text-align: center; width: 26.6279%;">多少夜里 泪倾盆落下</td>
+<td style="text-align: center; width: 30.1163%;">多少夜里累情的落下中就是完風入它</td>
+<td style="text-align: center; width: 35.1163%;">부분 내용만 일부 유사, 나머지 의미 불일치</td>
+<td style="text-align: center; width: 8.02326%;">44.4</td>
+</tr>
+<tr>
+<td style="text-align: center; width: 26.6279%;">终究是晚风如她没留下一丝牵挂</td>
+<td style="text-align: center; width: 30.1163%;">沒留下一丝清光他走後空間我的定格</td>
+<td style="text-align: center; width: 35.1163%;">"牵挂&rarr;清光", "후반부 내용 매칭 안됨"</td>
+<td style="text-align: center; width: 8.02326%;">42.9</td>
+</tr>
+<tr>
+<td style="text-align: center; width: 26.6279%;"><b>她走后 风干我的脸颊</b></td>
+<td style="text-align: center; width: 30.1163%;"><b>(매칭 없음)</b></td>
+<td style="text-align: center; width: 35.1163%;"><b>없음</b></td>
+<td style="text-align: center; width: 8.02326%;"><b>0.0</b></td>
+</tr>
+<tr>
+<td style="text-align: center; width: 26.6279%;">我们曾在星空下说过的那些情话</td>
+<td style="text-align: center; width: 30.1163%;">我們曾在星空下說過的那些情話</td>
+<td style="text-align: center; width: 35.1163%;">완전 일치</td>
+<td style="text-align: center; width: 8.02326%;">100.0</td>
+</tr>
+<tr>
+<td style="text-align: center; width: 26.6279%;">最后只是一场故事童话</td>
+<td style="text-align: center; width: 30.1163%;">最後這是一場故事童話</td>
+<td style="text-align: center; width: 35.1163%;">거의 일치 ("只&rarr;这" 오타)</td>
+<td style="text-align: center; width: 8.02326%;">90.0</td>
+</tr>
+</tbody>
+</table>
+<p data-ke-size="size16">&nbsp;</p>
 <h2 id="conclusion" data-ke-size="size26">🎯 결론</h2>
 <p data-ke-size="size16">Facebook Research의 Omnilingual ASR은 <b>다국어 음성 인식 분야의 혁신적인 breakthrough</b>입니다. 단일 모델로 100개 이상의 언어를 처리하는 기술적 성취는 전 세계적인 언어 장벽을 허무는 데 큰 기여를 하고 있습니다.</p>
 <p data-ke-size="size16">오늘 배운 실전 예제를 통해 직접 구현해보면서 <span class="ai-tech">머신러닝</span>과 <span class="ai-tech">딥러닝</span>의 강력함을 체감하셨을 것입니다. 이 기술을 활용하여 자신만의 혁신적인 애플리케이션을 개발해보시는 것을 추천합니다.</p>
+<p data-ke-size="size16">&nbsp;</p>
 <p data-ke-size="size16">여러분도 한번 Facebook Research의 GitHub 리포지토리에 접속하셔서 Omnilingual ASR의 전체 소스 코드를 살펴보시고, 직접 실험해보시길 추천드리면서 저는 다음 시간에 더 유익한 정보를 가지고 다시 찾아뵙겠습니다. 감사합니다.</p>
-<p data-ke-size="size16"><b>핵심 키워드:</b> Omnilingual ASR, 다국어 음성 인식, Transformer, Facebook Research, 자동 음성 인식, AI 기술</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p>[##_Image|kage@W1bvH/btsITTQ40zP/AAAAAAAAAAAAAAAAAAAAAIVsYCcuvLNDMvtkwVYQahtqkalWsrYiKkJcylO13C6w/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1764514799&amp;allow_ip=&amp;allow_referer=&amp;signature=KnWZAUyzuF4M3AFHDmBisPMudDY%3D|CDM|1.3|{"originWidth":611,"originHeight":610,"style":"alignCenter","link":"https://www.buymeacoffee.com/jmpark333","title":"https://fornewchallenge.tistory.com/","caption":"https://fornewchallenge.tistory.com/"}_##]</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><a href="https://fornewchallenge.tistory.com/entry/%F0%9F%8E%ACMovie-Gen-%EB%A9%94%ED%83%80%EC%9D%98-%EC%B0%A8%EC%84%B8%EB%8C%80-%EB%AF%B8%EB%94%94%EC%96%B4-%EC%83%9D%EC%84%B1-AI-%EB%AA%A8%EB%8D%B8%F0%9F%A4%96" target="_blank" rel="noopener">2024.10.05 - [AI 언어 모델] - 🎬Movie Gen: 메타의 차세대 미디어 생성 AI 모델🤖</a></p>
+<figure id="og_1762847446867" contenteditable="false" data-ke-type="opengraph" data-ke-align="alignCenter" data-og-type="article" data-og-title="🎬Movie Gen: 메타의 차세대 미디어 생성 AI 모델🤖" data-og-description="안녕하세요! 오늘은 메타가 어제 공개한 차세대 미디어 생성 AI 모델, Movie Gen에 대해서 알아보겠습니다. Movie Gen은 텍스트, 이미지, 비디오 및 오디오 입력을 기반으로 최대 1080p 해상도의 비디오" data-og-host="fornewchallenge.tistory.com" data-og-source-url="https://fornewchallenge.tistory.com/entry/%F0%9F%8E%ACMovie-Gen-%EB%A9%94%ED%83%80%EC%9D%98-%EC%B0%A8%EC%84%B8%EB%8C%80-%EB%AF%B8%EB%94%94%EC%96%B4-%EC%83%9D%EC%84%B1-AI-%EB%AA%A8%EB%8D%B8%F0%9F%A4%96" data-og-url="https://fornewchallenge.tistory.com/entry/%F0%9F%8E%ACMovie-Gen-%EB%A9%94%ED%83%80%EC%9D%98-%EC%B0%A8%EC%84%B8%EB%8C%80-%EB%AF%B8%EB%94%94%EC%96%B4-%EC%83%9D%EC%84%B1-AI-%EB%AA%A8%EB%8D%B8%F0%9F%A4%96" data-og-image="https://scrap.kakaocdn.net/dn/bsuyud/hyZMCr03ZP/BinQZlgAUdrfNgJWTmTEN0/img.png?width=631&amp;height=339&amp;face=199_31_581_157,https://scrap.kakaocdn.net/dn/bkGfMq/hyZNvy1vFi/ljnlZ1AQXCXByiNWAWge20/img.png?width=631&amp;height=339&amp;face=199_31_581_157,https://scrap.kakaocdn.net/dn/D8H9D/hyZNkEfpb1/vKSi4h7HTSur6cnXtNAEak/img.png?width=1001&amp;height=454&amp;face=0_0_1001_454"><a href="https://fornewchallenge.tistory.com/entry/%F0%9F%8E%ACMovie-Gen-%EB%A9%94%ED%83%80%EC%9D%98-%EC%B0%A8%EC%84%B8%EB%8C%80-%EB%AF%B8%EB%94%94%EC%96%B4-%EC%83%9D%EC%84%B1-AI-%EB%AA%A8%EB%8D%B8%F0%9F%A4%96" target="_blank" rel="noopener" data-source-url="https://fornewchallenge.tistory.com/entry/%F0%9F%8E%ACMovie-Gen-%EB%A9%94%ED%83%80%EC%9D%98-%EC%B0%A8%EC%84%B8%EB%8C%80-%EB%AF%B8%EB%94%94%EC%96%B4-%EC%83%9D%EC%84%B1-AI-%EB%AA%A8%EB%8D%B8%F0%9F%A4%96">
+<div class="og-image" style="background-image: url('https://scrap.kakaocdn.net/dn/bsuyud/hyZMCr03ZP/BinQZlgAUdrfNgJWTmTEN0/img.png?width=631&amp;height=339&amp;face=199_31_581_157,https://scrap.kakaocdn.net/dn/bkGfMq/hyZNvy1vFi/ljnlZ1AQXCXByiNWAWge20/img.png?width=631&amp;height=339&amp;face=199_31_581_157,https://scrap.kakaocdn.net/dn/D8H9D/hyZNkEfpb1/vKSi4h7HTSur6cnXtNAEak/img.png?width=1001&amp;height=454&amp;face=0_0_1001_454');">&nbsp;</div>
+<div class="og-text">
+<p class="og-title" data-ke-size="size16">🎬Movie Gen: 메타의 차세대 미디어 생성 AI 모델🤖</p>
+<p class="og-desc" data-ke-size="size16">안녕하세요! 오늘은 메타가 어제 공개한 차세대 미디어 생성 AI 모델, Movie Gen에 대해서 알아보겠습니다. Movie Gen은 텍스트, 이미지, 비디오 및 오디오 입력을 기반으로 최대 1080p 해상도의 비디오</p>
+<p class="og-host" data-ke-size="size16">fornewchallenge.tistory.com</p>
+</div>
+</a></figure>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+</div>
+
+<!-- 코드블록 접기/펼치기 기능 -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const codeBlocks = document.querySelectorAll('.code-block');
+    
+    codeBlocks.forEach(function(block, index) {
+        const preElement = block.querySelector('pre');
+        
+        if (preElement) {
+            const blockHeight = preElement.offsetHeight;
+            
+            // 300px 이상인 코드 블록에만 기능 적용
+            if (blockHeight > 300) {
+                block.classList.add('collapsed');
+                
+                // 페이드 오버레이 추가
+                const fadeOverlay = document.createElement('div');
+                fadeOverlay.className = 'code-fade-overlay';
+                block.appendChild(fadeOverlay);
+                
+                // 토글 버튼 추가
+                const toggleBtn = document.createElement('button');
+                toggleBtn.className = 'code-toggle-btn';
+                toggleBtn.setAttribute('data-block-index', index);
+                block.appendChild(toggleBtn);
+                
+                // 클릭 이벤트 리스너 추가
+                toggleBtn.addEventListener('click', function() {
+                    toggleCodeBlock(block);
+                });
+            }
+        }
+    });
+    
+    function toggleCodeBlock(block) {
+        const isCollapsed = block.classList.contains('collapsed');
+        
+        if (isCollapsed) {
+            block.classList.remove('collapsed');
+            block.classList.add('expanded');
+        } else {
+            block.classList.remove('expanded');
+            block.classList.add('collapsed');
+        }
+    }
+});
+</script>
+
+</body>
+</html>
